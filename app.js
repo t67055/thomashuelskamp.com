@@ -83,7 +83,7 @@ function viewProject(p) {
       <div class="prose">
         <section><h2 class="heading">Overview</h2><p>${esc(p.overview)}</p></section>
         <section><h2 class="heading">Process</h2><p>${esc(p.process)}</p></section>
-        <section><h2 class="heading">Results</h2><p>${esc(p.results)}</p></section>
+        <section><h2 class="heading">Impact</h2><p>${esc(p.results)}</p></section>
       </div>
       ${p.model ? `
       <section>
