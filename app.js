@@ -63,7 +63,7 @@ function viewWork() {
         ${carousel(p)}
         <div class="card-head"><h2><a href="#p-${p.id}">${esc(p.title)}</a></h2><span class="muted num">${esc(p.year)}</span></div>
         <p>${esc(p.summary)}</p>
-        <a class="more" href="#p-${p.id}">Read more →</a>
+        <a class="more" href="#p-${p.id}">Details →</a>
       </article>`).join("")}
     </div>
   </div>`;
