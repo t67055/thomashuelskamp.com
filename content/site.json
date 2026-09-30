@@ -21,26 +21,24 @@
       }
     ],
     "skills": [
+      "Product Design",
       "CAD",
+      "Automation",
+      "Manufacturing",
       "Prototyping",
-      "FEA",
-      "3D printing",
-      "Machining",
-      "Python",
-      "MATLAB",
       "Electronics"
     ]
   },
   "contact": {
-    "email": "you@example.com",
+    "email": "thuelsk1@jhu.edu",
     "links": [
       {
         "label": "LinkedIn",
-        "href": "https://www.linkedin.com/"
+        "href": "https://www.linkedin.com/in/thomas-huelskamp/"
       },
       {
         "label": "GitHub",
-        "href": "https://github.com/"
+        "href": "https://github.com/t67055"
       },
       {
         "label": "Résumé",
