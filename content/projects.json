@@ -1,0 +1,92 @@
+[
+  {
+    "id": "project-one",
+    "title": "Project One",
+    "year": "2026",
+    "photos": [
+      "",
+      "",
+      "",
+      ""
+    ],
+    "model": "models/project-one.stl",
+    "summary": "A short summary: what problem it solves and what you built.",
+    "overview": "Open with the problem. Who was it for, and what did success look like?",
+    "process": "The key decisions: concepts you tried, the analysis behind them, and how you prototyped and tested.",
+    "results": "What you measured and learned, and what you'd change next time."
+  },
+  {
+    "id": "project-two",
+    "title": "Project Two",
+    "year": "2026",
+    "photos": [
+      "",
+      "",
+      ""
+    ],
+    "model": null,
+    "summary": "A short summary of the second project.",
+    "overview": "Context and goal.",
+    "process": "How the design came together.",
+    "results": "The outcome."
+  },
+  {
+    "id": "project-three",
+    "title": "Project Three",
+    "year": "2025",
+    "photos": [
+      "",
+      "",
+      ""
+    ],
+    "model": null,
+    "summary": "A short summary of the third project.",
+    "overview": "Context and goal.",
+    "process": "How the design came together.",
+    "results": "The outcome."
+  },
+  {
+    "id": "project-four",
+    "title": "Project Four",
+    "year": "2025",
+    "photos": [
+      "",
+      "",
+      ""
+    ],
+    "model": null,
+    "summary": "A short summary of the fourth project.",
+    "overview": "Context and goal.",
+    "process": "How the design came together.",
+    "results": "The outcome."
+  },
+  {
+    "id": "project-five",
+    "title": "Project Five",
+    "year": "2024",
+    "photos": [
+      "",
+      ""
+    ],
+    "model": null,
+    "summary": "A short summary of the fifth project.",
+    "overview": "Context and goal.",
+    "process": "How the design came together.",
+    "results": "The outcome."
+  },
+  {
+    "id": "project-six",
+    "title": "Project Six",
+    "year": "2024",
+    "photos": [
+      "",
+      "",
+      ""
+    ],
+    "model": null,
+    "summary": "A short summary of the sixth project.",
+    "overview": "Context and goal.",
+    "process": "How the design came together.",
+    "results": "The outcome."
+  }
+]

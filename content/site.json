@@ -1,0 +1,24 @@
+{
+  "about": {
+    "portrait": "",
+    "lead": "A short introduction: what you build, what you care about, and what you're looking for next.",
+    "body": "A second paragraph for background: where you study or work, and the kind of problems you like to spend time on."
+  },
+  "contact": {
+    "email": "you@example.com",
+    "links": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/"
+      },
+      {
+        "label": "GitHub",
+        "href": "https://github.com/"
+      },
+      {
+        "label": "Résumé",
+        "href": ""
+      }
+    ]
+  }
+}
