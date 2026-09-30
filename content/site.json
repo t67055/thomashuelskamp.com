@@ -2,7 +2,34 @@
   "about": {
     "portrait": "",
     "lead": "A short introduction: what you build, what you care about, and what you're looking for next.",
-    "body": "A second paragraph for background: where you study or work, and the kind of problems you like to spend time on."
+    "body": "A second paragraph for background: where you study or work, and the kind of problems you like to spend time on.",
+    "experience": [
+      {
+        "years": "2026 —",
+        "what": "Current role or team",
+        "where": "Organization, city"
+      },
+      {
+        "years": "2025",
+        "what": "Previous role or internship",
+        "where": "Organization, city"
+      },
+      {
+        "years": "2023 — 27",
+        "what": "Degree, major",
+        "where": "University"
+      }
+    ],
+    "skills": [
+      "CAD",
+      "Prototyping",
+      "FEA",
+      "3D printing",
+      "Machining",
+      "Python",
+      "MATLAB",
+      "Electronics"
+    ]
   },
   "contact": {
     "email": "you@example.com",

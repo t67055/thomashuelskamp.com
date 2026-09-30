@@ -105,7 +105,7 @@ Open `content/projects.json`. Each project looks like this:
 - `model`: path to an `.stl`, or `null` for no 3D viewer.
 - `id`: lowercase with hyphens. It becomes the page address, e.g. `thomashuelskamp.com/#p-project-one`.
 
-About text, portrait, email and links are in `content/site.json`.
+About text, portrait, experience/education, skills, email and links are in `content/site.json`. Each experience entry has `years`, `what` (role or degree) and `where` (organization or school); list them newest first. To hide the experience or skills section, make its list empty: `[]`.
 
 **JSON rules:** text goes in "double quotes", items are separated by commas, and there's **no comma after the last item** in a list. If the site shows "Couldn't read content/…", that file has a typo; paste it into jsonlint.com to find the line.
 

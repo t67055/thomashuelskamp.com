@@ -44,9 +44,9 @@ main { padding-block: 72px 96px; min-height: 60vh; }
 .intro { display: grid; justify-items: center; text-align: center; gap: 16px; margin-bottom: 64px; }
 
 /* work grid */
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 56px 32px; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 104px 48px; }
 @media (max-width: 960px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (max-width: 600px) { .grid { grid-template-columns: minmax(0, 1fr); gap: 48px; } }
+@media (max-width: 600px) { .grid { grid-template-columns: minmax(0, 1fr); gap: 80px; } }
 .card { display: grid; gap: 12px; align-content: start; min-width: 0; }
 .card-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 4px; }
 .card h2 { font-size: 20px; line-height: 28px; font-weight: 400; margin: 0; }
@@ -98,6 +98,14 @@ main { padding-block: 72px 96px; min-height: 60vh; }
 .portrait { aspect-ratio: 4 / 5; max-width: 100%; background: var(--panel); overflow: hidden; }
 .portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .about-text { display: grid; gap: 20px; min-width: 0; }
+.about-block { display: grid; gap: 12px; margin-top: 20px; }
+.timeline { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.timeline li { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 16px; padding-block: 14px; border-bottom: 1px solid var(--line); }
+.timeline .yr { color: var(--muted); font-size: 13px; line-height: 24px; font-variant-numeric: tabular-nums; }
+.timeline b { font-weight: 500; display: block; }
+.timeline .where { color: var(--muted); font-size: 14px; }
+.skills { display: flex; flex-wrap: wrap; gap: 8px; }
+.skills span { border: 1px solid var(--line); padding: 4px 10px; font-size: 13px; line-height: 20px; }
 .about-text .lead { font-size: 20px; line-height: 32px; font-weight: 300; }
 .about-text p:not(.lead) { color: var(--muted); }
 

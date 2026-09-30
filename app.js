@@ -104,7 +104,19 @@ function viewAbout() {
   <div class="view">
     <div class="about">
       <div class="portrait">${ABOUT.portrait ? `<img src="${esc(ABOUT.portrait)}" alt="Portrait of Thomas Huelskamp">` : `<div class="ph">Portrait</div>`}</div>
-      <div class="about-text"><p class="lead">${esc(ABOUT.lead)}</p><p>${esc(ABOUT.body)}</p></div>
+      <div class="about-text">
+        <p class="lead">${esc(ABOUT.lead)}</p><p>${esc(ABOUT.body)}</p>
+        ${(ABOUT.experience || []).length ? `<div class="about-block">
+          <span class="label">Experience & education</span>
+          <ul class="timeline">${ABOUT.experience.map(e => `
+            <li><span class="yr">${esc(e.years)}</span><span><b>${esc(e.what)}</b><span class="where">${esc(e.where)}</span></span></li>`).join("")}
+          </ul>
+        </div>` : ""}
+        ${(ABOUT.skills || []).length ? `<div class="about-block">
+          <span class="label">Tools & skills</span>
+          <div class="skills">${ABOUT.skills.map(s => `<span>${esc(s)}</span>`).join("")}</div>
+        </div>` : ""}
+      
     </div>
   </div>`;
 }
@@ -208,13 +220,13 @@ async function mountViewer(model) {
 /* router: #work, #about, #contact, #p-<id> */
 function route() {
   if (disposeViewer) { disposeViewer(); disposeViewer = null; }
-  const h = location.hash.slice(1) || "work";
+  const h = location.hash.slice(1) || "about";
   let section = "work";
   const p = h.startsWith("p-") && PROJECTS.find(x => x.id === h.slice(2));
   if (p) viewProject(p);
-  else if (h === "about") { viewAbout(); section = "about"; }
+  else if (h === "work") viewWork();
   else if (h === "contact") { viewContact(); section = "contact"; }
-  else viewWork();
+  else { viewAbout(); section = "about"; }
   document.querySelectorAll("[data-nav]").forEach(a => {
     if (a.dataset.nav === section) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
   });
