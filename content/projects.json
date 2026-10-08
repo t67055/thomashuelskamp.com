@@ -1,7 +1,7 @@
 [
   {
     "id": "project-one",
-    "title": "Project One",
+    "title": "Universal VectorCam",
     "year": "2026",
     "photos": [
       "",
@@ -17,7 +17,7 @@
   },
   {
     "id": "project-two",
-    "title": "Project Two",
+    "title": "Open Source Manufacturing",
     "year": "2026",
     "photos": [
       "",
@@ -32,8 +32,8 @@
   },
   {
     "id": "project-three",
-    "title": "Project Three",
-    "year": "2025",
+    "title": "Savonius Axis Wind Turbine",
+    "year": "2026",
     "photos": [
       "",
       "",
@@ -47,7 +47,7 @@
   },
   {
     "id": "project-four",
-    "title": "Project Four",
+    "title": "Tablet-based VectorCam",
     "year": "2025",
     "photos": [
       "",
