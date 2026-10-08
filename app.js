@@ -106,6 +106,9 @@ function viewAbout() {
       <div class="portrait">${ABOUT.portrait ? `<img src="${esc(ABOUT.portrait)}" alt="Portrait of Thomas Huelskamp">` : `<div class="ph">Portrait</div>`}</div>
       <div class="about-text">
         <p class="lead">${esc(ABOUT.lead)}</p><p>${esc(ABOUT.body)}</p>
+        ${(ABOUT.details || []).length ? `
+        <div class="bio-more" id="bioMore" hidden>${ABOUT.details.map(t => `<p>${esc(t)}</p>`).join("")}</div>
+        <button class="more" type="button" id="bioToggle" aria-expanded="false" aria-controls="bioMore">Details →</button>` : ""}
         ${(ABOUT.experience || []).length ? `<div class="about-block">
           <span class="label">Experience & education</span>
           <ul class="timeline">${ABOUT.experience.map(e => `
@@ -116,9 +119,16 @@ function viewAbout() {
           <span class="label">Tools & skills</span>
           <div class="skills">${ABOUT.skills.map(s => `<span>${esc(s)}</span>`).join("")}</div>
         </div>` : ""}
-      
+      </div>
     </div>
   </div>`;
+  const tog = $("#bioToggle");
+  if (tog) tog.onclick = () => {
+    const open = tog.getAttribute("aria-expanded") !== "true";
+    $("#bioMore").hidden = !open;
+    tog.setAttribute("aria-expanded", open);
+    tog.textContent = open ? "Less ↑" : "Details →";
+  };
 }
 
 function viewContact() {

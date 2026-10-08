@@ -1,8 +1,12 @@
 {
   "about": {
-    "portrait": "",
+    "portrait": "images/portrait.jpg",
     "lead": "I build solutions with a focus on real-world impact and thoughtful design.",
     "body": "Check out my past projects and essays, or reach out to collaborate on something new.",
+    "details": [
+      "A longer story goes here: how you got into engineering, what you're working on now, and what you want to do next.",
+      "Add as many paragraphs as you like. Each one is a separate item in this list."
+    ],
     "experience": [
       {
         "years": "2025 — ",

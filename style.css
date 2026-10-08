@@ -36,6 +36,7 @@ header.site .wrap { display: flex; justify-content: space-between; align-items: 
 nav.primary { display: flex; gap: 28px; }
 nav.primary a { text-decoration: none; font-size: 12px; line-height: 20px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
 nav.primary a:hover, nav.primary a[aria-current="page"] { color: var(--fg); }
+nav.primary a.essays:hover, nav.primary a.essays:focus-visible { color: var(--red); }
 nav.primary a[aria-current="page"] { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
 
 main { padding-block: 72px 96px; min-height: 60vh; }
@@ -53,6 +54,9 @@ main { padding-block: 72px 96px; min-height: 60vh; }
 .card h2 a { text-decoration: none; }
 .card p { color: var(--muted); font-size: 15px; line-height: 24px; }
 .more { justify-self: start; font-size: 14px; line-height: 20px; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+button.more { background: none; border: 0; padding: 0; color: inherit; font: inherit; font-size: 14px; line-height: 20px; cursor: pointer; text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.bio-more { display: grid; gap: 20px; }
+.bio-more p { color: var(--muted); }
 
 /* carousel */
 .carousel { position: relative; min-width: 0; }
@@ -93,10 +97,11 @@ main { padding-block: 72px 96px; min-height: 60vh; }
 .file-btn input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 
 /* about */
-.about { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px 64px; max-width: 920px; margin: 0 auto; align-items: start; }
-@media (max-width: 720px) { .about { grid-template-columns: minmax(0, 1fr); } }
-.portrait { aspect-ratio: 4 / 5; max-width: 100%; background: var(--panel); overflow: hidden; }
-.portrait img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.about { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; max-width: 920px; margin: 0 auto; }
+.about-text { max-width: 640px; }
+.portrait { aspect-ratio: 3 / 2; width: 100%; max-width: 640px; background: var(--panel); overflow: hidden; }
+.portrait:has(img) { aspect-ratio: auto; background: none; }
+.portrait img { width: 100%; height: auto; display: block; }
 .about-text { display: grid; gap: 20px; min-width: 0; }
 .about-block { display: grid; gap: 12px; margin-top: 20px; }
 .timeline { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
