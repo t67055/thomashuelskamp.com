@@ -209,6 +209,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       <figure>
         <div class="frame empty">Photo coming soon</div>
       </figure>
+      <figure>
+        <div class="frame empty">Photo coming soon</div>
+      </figure>
     </div>
 
     <div class="pbody">
@@ -251,6 +254,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       <figure>
         <div class="frame empty">Photo coming soon</div>
       </figure>
+      <figure>
+        <div class="frame empty">Photo coming soon</div>
+      </figure>
     </div>
 
     <div class="pbody">
@@ -268,6 +274,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     </div>
     <div class="gallery">
       <!-- Replace each empty frame with a <figure> holding an <img> or 3D model -->
+      <figure>
+        <div class="frame empty">Photo coming soon</div>
+      </figure>
       <figure>
         <div class="frame empty">Photo coming soon</div>
       </figure>
@@ -368,7 +377,13 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     wrap.append(gal);
     wrap.insertAdjacentHTML('beforeend', '<button type="button" class="pa prev" aria-label="Previous photos"><span>&larr;</span></button><button type="button" class="pa next" aria-label="More photos"><span>&rarr;</span></button>');
     const [gp, gn] = wrap.querySelectorAll('.pa');
-    const gstep = () => { const f = gal.querySelector('figure'); return f ? f.offsetWidth + 16 : gal.clientWidth; };
+    // Arrows move a full page: three photos on wide screens, one on phones
+    const gstep = () => {
+      const f = gal.querySelector('figure');
+      if (!f) return gal.clientWidth;
+      const per = Math.max(1, Math.floor((gal.clientWidth + 16) / (f.offsetWidth + 16) + 0.01));
+      return per * (f.offsetWidth + 16);
+    };
     const gupdate = () => {
       const max = gal.scrollWidth - gal.clientWidth - 2;
       gp.hidden = gn.hidden = max <= 0;
