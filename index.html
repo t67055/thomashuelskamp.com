@@ -63,7 +63,17 @@ hr{border:0;border-top:1px solid var(--ink);margin:0 auto;width:calc(min(1240px,
 .ctrls button:active{background:#1a1a1a}
 .ctrls button:disabled{opacity:.3;cursor:default;border-color:#444}
 
-.slides{display:flex;align-items:flex-start;gap:max(5vw,32px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.stage{position:relative}
+.slides{display:flex;align-items:flex-start;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;margin-inline:calc(-1*max(5vw,16px));padding-inline:max(5vw,16px);scroll-padding-inline:max(5vw,16px)}
+.pa{position:absolute;z-index:2;top:0;width:44px;height:44px;margin-top:-22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center;color:#fff;transition:opacity .2s ease}
+.pa span{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.35);font:15px/1 var(--sans)}
+.pa:hover span{border-color:#fff}
+.pa:focus-visible{outline:none}
+.pa:focus-visible span{outline:2px solid #fff;outline-offset:2px}
+.pa.prev{left:6px}
+.pa.next{right:6px}
+.pa[hidden]{display:none}
+.pa.off{opacity:0;pointer-events:none}
 .slides::-webkit-scrollbar{display:none}
 .project{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always}
 .phead{margin-bottom:20px}
@@ -143,6 +153,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
   </div>
 
   <!-- Projects scroll left/right. Each <section class="project"> is one slide; copy one to add a project. -->
+  <div class="stage">
+  <button type="button" class="pa prev" id="pprev" aria-label="Previous project"><span>&larr;</span></button>
+  <button type="button" class="pa next" id="pnext" aria-label="Next project"><span>&rarr;</span></button>
   <div class="slides" id="slides" tabindex="0" aria-label="Projects, scroll sideways">
 
   <!-- PROJECT: copy this whole <section class="project"> block to add another project -->
@@ -232,6 +245,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
   </section>
 
   </div>
+  </div>
 </main>
 
 <hr>
@@ -273,15 +287,33 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       i = Math.max(0, Math.min(projects.length - 1, i));
       slides.scrollTo({ left: projects[i].offsetLeft - projects[0].offsetLeft, behavior: 'smooth' });
     };
+    const stage = slides.parentElement;
+    const pprev = document.getElementById('pprev'), pnext = document.getElementById('pnext');
+    pprev.hidden = pnext.hidden = projects.length < 2;
+    const step = () => projects[0].offsetWidth + parseFloat(getComputedStyle(slides).columnGap || 0);
     const update = () => {
       const i = Math.max(0, Math.min(projects.length - 1, current()));
       tabBtns.forEach((b, j) => b.setAttribute('aria-current', j === i ? 'true' : 'false'));
       count.textContent = `${i + 1} / ${projects.length}`;
       prev.disabled = i === 0;
       next.disabled = i === projects.length - 1;
+      pprev.classList.toggle('off', i === 0);
+      pnext.classList.toggle('off', i === projects.length - 1);
+      // Neighbouring projects are dimmed; after ~30% of a swipe toward one it is fully visible
+      const pos = slides.scrollLeft / step();
+      projects.forEach((p, j) => {
+        const dist = Math.abs(j - pos);
+        p.style.opacity = dist <= 0.7 ? 1 : Math.max(0.25, 0.25 + 0.75 * (1 - dist) / 0.3);
+      });
+      // Photo arrows sit on the middle of the current project's first image
+      const f = projects[i].querySelector('.frame') || projects[i];
+      const top = f.getBoundingClientRect().top - stage.getBoundingClientRect().top + f.offsetHeight / 2;
+      pprev.style.top = pnext.style.top = `${Math.round(top)}px`;
     };
     tabBtns.forEach(b => b.addEventListener('click', () => go(Number(b.dataset.i))));
     prev.addEventListener('click', () => go(current() - 1));
+    pprev.addEventListener('click', () => go(current() - 1));
+    pnext.addEventListener('click', () => go(current() + 1));
     next.addEventListener('click', () => go(current() + 1));
     slides.addEventListener('keydown', e => {
       if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
