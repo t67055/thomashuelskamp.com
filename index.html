@@ -157,21 +157,11 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     <div class="gallery">
       <figure>
         <div class="frame">
-          <svg viewBox="0 0 400 300" role="img" aria-label="Side view of a smartphone resting over a magnifying lens and two LEDs, above a mosquito specimen">
-            <rect class="ink" x="96" y="46" width="208" height="16" rx="6"/>
-            <path class="ink" d="M184 62 V70 H216 V62"/>
-            <path class="ink" d="M120 62 V230 M280 62 V230"/>
-            <ellipse class="ink" cx="200" cy="104" rx="46" ry="9"/>
-            <path class="ink thin" d="M154 104 H120 M246 104 H280"/>
-            <circle class="ink" cx="146" cy="150" r="6"/><circle class="ink" cx="254" cy="150" r="6"/>
-            <path class="ink thin" d="M152 156 L180 196 M248 156 L220 196 M146 158 L170 200 M254 158 L230 200"/>
-            <path class="ink thin" d="M200 113 V190" stroke-dasharray="3 6"/>
-            <ellipse class="ink" cx="200" cy="208" rx="10" ry="5"/>
-            <path class="ink" d="M190 208 L176 214 M206 210 L214 222 M198 212 L194 224 M204 204 L224 196"/>
-            <path class="ink" d="M84 230 H316"/>
-          </svg>
+          <div class="model" data-stl="models/VectorCam2-assembly.stl" data-az="3.9" data-el="0.7" role="img" aria-label="Rotating 3D model of the assembled VectorCam 2">
+            <img src="images/vectorcam2-assembly.jpg" alt="" width="1200" height="900" loading="lazy">
+          </div>
         </div>
-        <figcaption>Any smartphone over a magnifying lens and LEDs</figcaption>
+        <figcaption>VectorCam 2 assembled, 3D model. Drag to rotate.</figcaption>
       </figure>
       <figure>
         <div class="frame">
@@ -190,7 +180,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       </figure>
       <figure>
         <div class="frame">
-          <div class="model" data-stl="models/VectorCam2.stl" role="img" aria-label="Rotating 3D model of the VectorCam 2 print plate">
+          <div class="model" data-stl="models/VectorCam2.stl" data-az="5.41" data-el="0.85" role="img" aria-label="Rotating 3D model of the VectorCam 2 print plate">
             <img src="images/vectorcam2-model.jpg" alt="" width="1200" height="900" loading="lazy">
           </div>
         </div>
@@ -362,7 +352,7 @@ function mount(box) {
     geo.computeBoundingSphere();
     const r = geo.boundingSphere.radius;
     const d = r / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2));
-    const az = 5.41, el = 0.85;
+    const az = parseFloat(box.dataset.az ?? 5.41), el = parseFloat(box.dataset.el ?? 0.85);
     const target = new THREE.Vector3();
     camera.position.set(d * Math.cos(el) * Math.sin(az), d * Math.sin(el), d * Math.cos(el) * Math.cos(az));
     // Frame the parts in the first view: centre their on-screen outline and fill ~85% of the frame
