@@ -11,10 +11,10 @@
 <style>
 /* VOICE  quiet, personal, a portfolio that reads like a note left on the bench
    IDEA   a typed letter paper-clipped to a contact sheet of work photos
-   PICTURE a portrait frame beside the letter, then a sideways contact strip per project
+   PICTURE a portrait frame beside the letter, then projects that slide left and right
    COLOUR black ground in every theme, white ink, grey #8a8a8a for secondary text, #1a1a1a frames
    TYPE   Newsreader for the letter and titles, Inter Tight for labels and captions
-   LAYOUT laptop: photo left, letter right, rule, project strips full width, contact; phone: one column */
+   LAYOUT laptop: photo left, letter right, rule at content width, project slider, contact; phone: one column */
 :root{color-scheme:dark;--bg:#000;--ink:#f2f2f2;--dim:#8a8a8a;--line:#2a2a2a;--frame:#111;--serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif}
 :root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
@@ -39,24 +39,31 @@ img{max-width:100%;display:block}
 .letter .sig{font:italic 400 clamp(30px,4vw,40px)/1.1 var(--serif);letter-spacing:-.01em;margin:0}
 .letter .sig-sub{font:400 15px/1.4 var(--sans);color:var(--dim);margin:.5em 0 0}
 
-hr{border:0;border-top:1px solid var(--ink);margin:0;opacity:.9}
+hr{border:0;border-top:1px solid var(--ink);margin:0 auto;width:calc(min(1240px,100%) - 2*max(5vw,16px));opacity:.9}
 
-.work{padding-block:clamp(40px,6vw,80px) 0}
-.project{padding-bottom:clamp(56px,7vw,96px)}
-.project+.project{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,64px)}
-.phead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
-.phead h2{font:500 clamp(32px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.02em;margin:0;text-wrap:balance}
-.phead .role{font:400 15px/1.4 var(--sans);color:var(--dim);margin:6px 0 0}
+.work{padding-block:clamp(40px,6vw,80px) clamp(56px,7vw,96px)}
+.whead{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;margin-bottom:24px}
+.tabs{display:flex;gap:0 24px;flex-wrap:wrap;font:500 15px/1 var(--sans)}
+.tabs button{background:none;border:0;border-bottom:1px solid transparent;color:var(--dim);font:inherit;padding:14px 0 10px;cursor:pointer}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-current=true]{color:var(--ink);border-bottom-color:var(--ink)}
+.nav{display:flex;align-items:center;gap:14px}
+.count{font:400 14px/1 var(--sans);color:var(--dim);font-variant-numeric:tabular-nums;white-space:nowrap}
 .ctrls{display:flex;gap:8px}
 .ctrls button{width:44px;height:44px;border-radius:50%;border:1px solid #444;background:transparent;color:var(--ink);font:18px/1 var(--sans);cursor:pointer;display:grid;place-items:center}
 .ctrls button:hover{border-color:var(--ink)}
 .ctrls button:active{background:#1a1a1a}
 .ctrls button:disabled{opacity:.3;cursor:default;border-color:#444}
 
-.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;margin-bottom:28px;scrollbar-width:thin;scrollbar-color:#444 transparent;overscroll-behavior-x:contain}
-.strip::-webkit-scrollbar{height:6px}
-.strip::-webkit-scrollbar-thumb{background:#444;border-radius:3px}
-.strip figure{flex:0 0 clamp(260px,46vw,560px);margin:0;scroll-snap-align:start}
+.slides{display:flex;align-items:flex-start;gap:max(5vw,32px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
+.slides::-webkit-scrollbar{display:none}
+.project{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always}
+.phead{margin-bottom:20px}
+.phead h2{font:500 clamp(32px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.phead .role{font:400 15px/1.4 var(--sans);color:var(--dim);margin:6px 0 0}
+
+.gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:28px}
+.gallery figure{margin:0}
 .frame{aspect-ratio:4/3;background:var(--frame);overflow:hidden}
 .frame svg,.frame img{width:100%;height:100%;object-fit:cover;display:block}
 figcaption{font:400 14px/1.4 var(--sans);color:var(--dim);padding-top:10px}
@@ -86,8 +93,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){.spin{animation:none}html{scroll-behavior:auto}}
 
-@media(max-width:860px){.intro{grid-template-columns:minmax(0,1fr)}.portrait{position:static;max-width:440px;aspect-ratio:4/3}.pbody{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:600px){.letter{font-size:17px}.letter .date{margin-bottom:24px}.strip figure{flex-basis:84%}.ctrls{display:none}dl div{grid-template-columns:7.5em minmax(0,1fr)}}
+@media(max-width:860px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery figure:nth-child(3){display:none}.intro{grid-template-columns:minmax(0,1fr)}.portrait{position:static;max-width:440px;aspect-ratio:4/3}.pbody{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.letter{font-size:17px}.letter .date{margin-bottom:24px}.gallery{grid-template-columns:minmax(0,1fr)}dl div{grid-template-columns:7.5em minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -116,6 +123,16 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 <hr>
 
 <main class="wrap work" id="work">
+  <div class="whead">
+    <div class="tabs" id="tabs" aria-label="Projects"></div>
+    <div class="nav">
+      <span class="count" id="count" aria-live="polite"></span>
+      <div class="ctrls"><button type="button" id="prev" aria-label="Previous project">&larr;</button><button type="button" id="next" aria-label="Next project">&rarr;</button></div>
+    </div>
+  </div>
+
+  <!-- Projects scroll left/right. Each <section class="project"> is one slide; copy one to add a project. -->
+  <div class="slides" id="slides" tabindex="0" aria-label="Projects, scroll sideways">
 
   <!-- PROJECT: copy this whole <section class="project"> block to add another project -->
   <section class="project" aria-labelledby="p-vawt">
@@ -124,10 +141,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
         <h2 id="p-vawt">Vertical axis wind turbine</h2>
         <p class="role">Personal project</p>
       </div>
-      <div class="ctrls"><button type="button" data-dir="-1" aria-label="Previous image">&larr;</button><button type="button" data-dir="1" aria-label="Next image">&rarr;</button></div>
     </div>
 
-    <div class="strip" tabindex="0" aria-label="Wind turbine images">
+    <div class="gallery">
       <!-- To use a photo, replace the <svg> inside .frame with <img src="images/vawt-1.jpg" alt="..."> -->
       <figure>
         <div class="frame">
@@ -195,10 +211,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
         <h2 id="p-vc">VectorCam</h2>
         <p class="role">Hardware team, Dr. Acharya's lab, Johns Hopkins CBID</p>
       </div>
-      <div class="ctrls"><button type="button" data-dir="-1" aria-label="Previous image">&larr;</button><button type="button" data-dir="1" aria-label="Next image">&rarr;</button></div>
     </div>
 
-    <div class="strip" tabindex="0" aria-label="VectorCam images">
+    <div class="gallery">
       <figure>
         <div class="frame">
           <svg viewBox="0 0 400 300" role="img" aria-label="Imaging device with a camera above a specimen tray">
@@ -251,6 +266,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     </div>
   </section>
 
+  </div>
 </main>
 
 <hr>
@@ -309,26 +325,38 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
   }
 
 
-  // Arrow buttons scroll each project's image strip one frame at a time
-  for (const proj of document.querySelectorAll('.project')) {
-    const strip = proj.querySelector('.strip');
-    const btns = proj.querySelectorAll('.ctrls button');
-    if (!strip || !btns.length) continue;
-    const step = () => {
-      const f = strip.querySelector('figure');
-      return f ? f.getBoundingClientRect().width + 16 : strip.clientWidth;
+  // Left/right navigation between projects
+  const slides = document.getElementById('slides');
+  const projects = slides ? [...slides.querySelectorAll('.project')] : [];
+  const tabs = document.getElementById('tabs');
+  const count = document.getElementById('count');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  if (slides && projects.length) {
+    tabs.innerHTML = projects.map((p, i) => `<button type="button" data-i="${i}">${p.querySelector('h2').textContent}</button>`).join('');
+    const tabBtns = [...tabs.querySelectorAll('button')];
+    const current = () => Math.round(slides.scrollLeft / (projects[0].offsetWidth + parseFloat(getComputedStyle(slides).columnGap || 0)));
+    const go = i => {
+      i = Math.max(0, Math.min(projects.length - 1, i));
+      slides.scrollTo({ left: projects[i].offsetLeft - projects[0].offsetLeft, behavior: 'smooth' });
     };
     const update = () => {
-      const max = strip.scrollWidth - strip.clientWidth - 2;
-      btns[0].disabled = strip.scrollLeft <= 2;
-      btns[1].disabled = strip.scrollLeft >= max;
+      const i = Math.max(0, Math.min(projects.length - 1, current()));
+      tabBtns.forEach((b, j) => b.setAttribute('aria-current', j === i ? 'true' : 'false'));
+      count.textContent = `${i + 1} / ${projects.length}`;
+      prev.disabled = i === 0;
+      next.disabled = i === projects.length - 1;
     };
-    btns.forEach(b => b.addEventListener('click', () => {
-      strip.scrollBy({ left: Number(b.dataset.dir) * step(), behavior: 'smooth' });
-    }));
-    strip.addEventListener('scroll', update, { passive: true });
-    const ro = new ResizeObserver(update);
-    ro.observe(strip);
+    tabBtns.forEach(b => b.addEventListener('click', () => go(Number(b.dataset.i))));
+    prev.addEventListener('click', () => go(current() - 1));
+    next.addEventListener('click', () => go(current() + 1));
+    slides.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+    });
+    slides.addEventListener('scroll', update, { passive: true });
+    const slideRO = new ResizeObserver(update);
+    slideRO.observe(slides);
     update();
   }
 
