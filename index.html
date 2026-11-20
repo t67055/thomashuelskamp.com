@@ -157,7 +157,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     <div class="gallery">
       <figure>
         <div class="frame">
-          <div class="model" data-stl="models/VectorCam2-assembly.stl" data-az="3.9" data-el="0.7" role="img" aria-label="Rotating 3D model of the assembled VectorCam 2">
+          <div class="model" data-stl="models/VectorCam2-assembly.stl" data-az="0" data-el="1.5707" data-rotate="false" role="img" aria-label="3D model of the assembled VectorCam 2, seen from above">
             <img src="images/vectorcam2-assembly.jpg" alt="" width="1200" height="900" loading="lazy">
           </div>
         </div>
@@ -180,7 +180,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       </figure>
       <figure>
         <div class="frame">
-          <div class="model" data-stl="models/VectorCam2.stl" data-az="5.41" data-el="0.85" role="img" aria-label="Rotating 3D model of the VectorCam 2 print plate">
+          <div class="model" data-stl="models/VectorCam2.stl" data-az="5.41" data-el="0.85" data-rotate="false" role="img" aria-label="3D model of the VectorCam 2 print plate">
             <img src="images/vectorcam2-model.jpg" alt="" width="1200" height="900" loading="lazy">
           </div>
         </div>
@@ -329,7 +329,7 @@ function mount(box) {
   controls.enableZoom = false;
   controls.enablePan = false;
   controls.enableDamping = true;
-  controls.autoRotate = !still;
+  controls.autoRotate = !still && box.dataset.rotate !== 'false';
   controls.autoRotateSpeed = 1.2;
 
   const size = () => {
