@@ -65,7 +65,7 @@ hr{border:0;border-top:1px solid var(--ink);margin:0 auto;width:calc(min(1240px,
 .ctrls button:disabled{opacity:.3;cursor:default;border-color:#444}
 
 .stage{position:relative}
-.slides{display:flex;align-items:flex-start;gap:calc(2*max(5vw,16px));overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain;margin-inline:calc(-1*max(5vw,16px));padding-inline:max(5vw,16px);scroll-padding-inline:max(5vw,16px)}
+.slides{display:flex;align-items:flex-start;gap:max(5vw,32px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;overscroll-behavior-x:contain}
 .dim .intro,.dim .work,.dim .contact{transition:opacity .5s ease}
 .dim .off-view{opacity:.7}
 .pa{position:absolute;z-index:2;top:50%;width:44px;height:44px;margin-top:-22px;padding:0;border:0;background:none;cursor:pointer;display:grid;place-items:center;color:#fff;transition:opacity .2s ease}
@@ -73,9 +73,8 @@ hr{border:0;border-top:1px solid var(--ink);margin:0 auto;width:calc(min(1240px,
 .pa:hover span{border-color:#fff}
 .pa:focus-visible{outline:none}
 .pa:focus-visible span{outline:2px solid #fff;outline-offset:2px}
-.pa.prev{left:calc(-.5*max(5vw,16px) - 22px)}
-.pa.next{right:calc(-.5*max(5vw,16px) - 22px)}
-@media(max-width:760px){.pa.prev{left:6px}.pa.next{right:6px}}
+.pa.prev{left:6px}
+.pa.next{right:6px}
 .pa[hidden]{display:none}
 .pa.off{opacity:0;pointer-events:none}
 
