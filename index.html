@@ -102,7 +102,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     </figure>
 
     <article class="letter">
-      <p class="date">November 2026</p>
+      <p class="date" id="today">November 19, 2026</p>
       <p class="salute">Dear reader,</p>
       <p>Thanks for stopping by. I'm Thomas, a student graduating in May 2027, and I like problems you can hold in your hands: parts that have to fit, machines that have to run, and numbers that have to add up on the bench and not only on paper.</p>
       <p>Right now that means VectorCam 2. With the VectorCam team at Johns Hopkins CBID, I work on the hardware for an AI-enabled camera that helps track the mosquitoes that spread disease.</p>
@@ -261,6 +261,10 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     slideRO.observe(slides);
     update();
   }
+
+  // Letter date shows the visitor's current date
+  const today = document.getElementById('today');
+  if (today) today.textContent = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 
   const yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
