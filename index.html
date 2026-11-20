@@ -41,6 +41,7 @@ img{max-width:100%;display:block}
 hr{border:0;border-top:1px solid var(--ink);margin:0 auto;width:calc(min(1240px,100%) - 2*max(5vw,16px));opacity:.9}
 
 .work{padding-block:clamp(40px,6vw,80px) clamp(56px,7vw,96px)}
+.whead[hidden]{display:none}
 .whead{display:flex;justify-content:space-between;align-items:center;gap:12px 24px;flex-wrap:wrap;margin-bottom:24px}
 .tabs{display:flex;gap:0 24px;flex-wrap:wrap;font:500 15px/1 var(--sans)}
 .tabs button{background:none;border:0;border-bottom:1px solid transparent;color:var(--dim);font:inherit;padding:14px 0 10px;cursor:pointer}
@@ -88,9 +89,7 @@ dd{margin:0}
 .elsewhere a:hover{color:var(--ink)}
 footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;font:400 14px/1.4 var(--sans);color:var(--dim)}
 
-.spin{transform-origin:200px 150px;animation:spin 14s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-@media(prefers-reduced-motion:reduce){.spin{animation:none}html{scroll-behavior:auto}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
 @media(max-width:860px){.intro{grid-template-columns:minmax(0,1fr)}.portrait{max-width:440px;aspect-ratio:4/3}.pbody{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.letter{font-size:17px}.letter .date{margin-bottom:24px}.gallery{grid-template-columns:minmax(0,1fr)}dl div{grid-template-columns:7.5em minmax(0,1fr)}}
@@ -110,8 +109,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       <p class="date">November 2026</p>
       <p class="salute">Dear reader,</p>
       <p>Thanks for stopping by. I'm Thomas, a student graduating in May 2027, and I like problems you can hold in your hands: parts that have to fit, machines that have to run, and numbers that have to add up on the bench and not only on paper.</p>
-      <p>Right now that means two things. On my own time I'm building a Savonius wind turbine and working out how much power it really makes. With the VectorCam team at Johns Hopkins CBID, I work on the hardware for an AI-enabled camera that helps track the mosquitoes that spread disease.</p>
-      <p>Below are photos and notes from both. If something here is useful to you, or you're working on something I could help with, my contact details are at the bottom of the page.</p>
+      <p>Right now that means VectorCam 2. With the VectorCam team at Johns Hopkins CBID, I work on the hardware for an AI-enabled camera that helps track the mosquitoes that spread disease.</p>
+      <p>Below are photos and notes from the project. If something here is useful to you, or you're working on something I could help with, my contact details are at the bottom of the page.</p>
       <p class="close">Sincerely,</p>
       <p class="sig">Thomas Huelskamp</p>
     </article>
@@ -133,80 +132,10 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
   <div class="slides" id="slides" tabindex="0" aria-label="Projects, scroll sideways">
 
   <!-- PROJECT: copy this whole <section class="project"> block to add another project -->
-  <section class="project" aria-labelledby="p-vawt">
-    <div class="phead">
-      <div>
-        <h2 id="p-vawt">Vertical axis wind turbine</h2>
-        <p class="role">Personal project</p>
-      </div>
-    </div>
-
-    <div class="gallery">
-      <!-- To use a photo, replace the <svg> inside .frame with <img src="images/vawt-1.jpg" alt="..."> -->
-      <figure>
-        <div class="frame">
-          <svg viewBox="0 0 400 300" role="img" aria-label="Side view of a two-stage Savonius rotor">
-            <line class="ink" x1="200" y1="24" x2="200" y2="286"/>
-            <ellipse class="ink" cx="200" cy="58" rx="92" ry="13"/>
-            <ellipse class="ink" cx="200" cy="150" rx="92" ry="13"/>
-            <ellipse class="ink" cx="200" cy="242" rx="92" ry="13"/>
-            <path class="ink" d="M112 62 V146 M200 71 V137"/>
-            <path class="ink thin" d="M112 80 Q150 92 200 84 M112 104 Q150 116 200 108 M112 128 Q150 140 200 132"/>
-            <path class="ink" d="M288 154 V238 M200 163 V229"/>
-            <path class="ink thin" d="M200 176 Q250 188 288 180 M200 200 Q250 212 288 204 M200 224 Q250 236 288 228"/>
-            <path class="ink" d="M170 286 H230"/>
-          </svg>
-        </div>
-        <figcaption>Rotor, side view</figcaption>
-      </figure>
-      <figure>
-        <div class="frame">
-          <svg viewBox="0 0 400 300" role="img" aria-label="Top view of the S-shaped rotor turning in the wind">
-            <g class="ink thin"><path d="M18 110 H70 M18 150 H70 M18 190 H70"/><path d="M62 104 L70 110 L62 116 M62 144 L70 150 L62 156 M62 184 L70 190 L62 196"/></g>
-            <circle class="ink thin" cx="200" cy="150" r="118" stroke-dasharray="3 7"/>
-            <g class="spin">
-              <path class="ink" d="M88 150 A62 62 0 0 1 212 150"/>
-              <path class="ink" d="M188 150 A62 62 0 0 0 312 150"/>
-              <circle class="solid" cx="200" cy="150" r="4"/>
-            </g>
-          </svg>
-        </div>
-        <figcaption>Rotor, top view: two overlapping buckets catch the wind by drag</figcaption>
-      </figure>
-      <figure>
-        <div class="frame">
-          <svg viewBox="0 0 400 300" role="img" aria-label="Brushless DC motor stator considered as the generator">
-            <circle class="ink" cx="200" cy="150" r="112"/>
-            <circle class="ink thin" cx="200" cy="150" r="96"/>
-            <g id="teeth"></g>
-            <circle class="ink" cx="200" cy="150" r="30"/>
-            <circle class="solid" cx="200" cy="150" r="5"/>
-          </svg>
-        </div>
-        <figcaption>Brushless DC motor, the generator under consideration</figcaption>
-      </figure>
-    </div>
-
-    <div class="pbody">
-      <div>
-        <p>A drag-type Savonius rotor I'm designing and building myself. Savonius turbines are slow and simple, but they start in light, gusty wind from any direction, which makes them a good fit for a small battery-charging setup.</p>
-        <p>Most of the work so far has been analysis: estimating the startup torque the rotor needs to get moving, and the gap between peak output and what it averages over real wind. Peak power is around 500 W; the average is closer to 10 W, and that gap drives most of the electrical decisions.</p>
-      </div>
-      <dl>
-        <div><dt>Rotor</dt><dd>Savonius, drag type</dd></div>
-        <div><dt>Output</dt><dd>~500 W peak, ~10 W average</dd></div>
-        <div><dt>System</dt><dd>24 V, LiFePO4 battery</dd></div>
-        <div><dt>Charging</dt><dd>Commercial wind charge controller</dd></div>
-        <div><dt>Monitoring</dt><dd>Rectifier, voltage and current displays, microcontroller</dd></div>
-        <div><dt>Status</dt><dd>Choosing the generator</dd></div>
-      </dl>
-    </div>
-  </section>
-
   <section class="project" aria-labelledby="p-vc">
     <div class="phead">
       <div>
-        <h2 id="p-vc">VectorCam</h2>
+        <h2 id="p-vc">VectorCam 2</h2>
         <p class="role">Hardware team, Dr. Acharya's lab, Johns Hopkins CBID</p>
       </div>
     </div>
@@ -253,7 +182,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 
     <div class="pbody">
       <div>
-        <p>VectorCam is an AI-enabled device for mosquito vector surveillance: it images collected mosquitoes so they can be identified quickly in the field, without a trained specialist at a microscope. Knowing which species are present, and where, is what lets health teams target malaria and other mosquito-borne disease.</p>
+        <p>VectorCam 2 is an AI-enabled device for mosquito vector surveillance: it images collected mosquitoes so they can be identified quickly in the field, without a trained specialist at a microscope. Knowing which species are present, and where, is what lets health teams target malaria and other mosquito-borne disease.</p>
         <p>I'm on the hardware side of the team, working with Dr. Acharya's lab at the Johns Hopkins Center for Bioengineering Innovation and Design, and I help bring new mechanical engineering undergrads onto the hardware team.</p>
       </div>
       <dl>
@@ -291,25 +220,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 {
   const NS = 'http://www.w3.org/2000/svg';
 
-  // Stator teeth for the generator drawing
-  const teeth = document.getElementById('teeth');
-  if (teeth) {
-    let d = '';
-    const n = 12;
-    for (let i = 0; i < n; i++) {
-      const a = (i / n) * Math.PI * 2;
-      const c = Math.cos(a), s = Math.sin(a);
-      const x1 = 200 + c * 40, y1 = 150 + s * 40, x2 = 200 + c * 88, y2 = 150 + s * 88;
-      d += `M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)} `;
-      const px = -s * 9, py = c * 9;
-      d += `M${(x2 + px).toFixed(1)} ${(y2 + py).toFixed(1)} L${(x2 - px).toFixed(1)} ${(y2 - py).toFixed(1)} `;
-    }
-    const p = document.createElementNS(NS, 'path');
-    p.setAttribute('d', d);
-    p.setAttribute('class', 'ink');
-    teeth.appendChild(p);
-  }
-
   // Specimen tray: 6 x 4 wells, one boxed by the detector
   const tray = document.getElementById('tray');
   if (tray) {
@@ -330,6 +240,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
   const count = document.getElementById('count');
   const prev = document.getElementById('prev');
   const next = document.getElementById('next');
+  const whead = document.querySelector('.whead');
+  if (whead) whead.hidden = projects.length < 2;
   if (slides && projects.length) {
     tabs.innerHTML = projects.map((p, i) => `<button type="button" data-i="${i}">${p.querySelector('h2').textContent}</button>`).join('');
     const tabBtns = [...tabs.querySelectorAll('button')];
