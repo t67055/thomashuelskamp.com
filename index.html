@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thomas Huelskamp</title>
+<meta name="description" content="Thomas Huelskamp: projects, photos and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE  quiet, personal, a portfolio that reads like a note left on the bench
+   IDEA   a typed letter paper-clipped to a contact sheet of work photos
+   PICTURE a portrait frame beside the letter, then a sideways contact strip per project
+   COLOUR black ground in every theme, white ink, grey #8a8a8a for secondary text, #1a1a1a frames
+   TYPE   Newsreader for the letter and titles, Inter Tight for labels and captions
+   LAYOUT laptop: photo left, letter right, rule, project strips full width, contact; phone: one column */
+:root{color-scheme:dark;--bg:#000;--ink:#f2f2f2;--dim:#8a8a8a;--line:#2a2a2a;--frame:#111;--serif:"Newsreader",Georgia,"Times New Roman",serif;--sans:"Inter Tight",system-ui,-apple-system,"Segoe UI",sans-serif}
+:root[data-theme=light],:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:24px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--serif);overflow-x:clip;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:#fff}
+:focus-visible{outline:2px solid #fff;outline-offset:3px}
+img{max-width:100%;display:block}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
+
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:22px;font:500 15px/1 var(--sans)}
+nav .links{display:flex;gap:4px}
+nav .links a{text-decoration:none;color:var(--dim);padding:14px 10px}
+nav .links a:hover{color:var(--ink)}
+nav .name{text-decoration:none;letter-spacing:-.01em}
+
+.intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:start;padding-block:clamp(20px,4vw,56px) clamp(48px,6vw,88px)}
+.portrait{margin:0;aspect-ratio:4/5;background:var(--frame);overflow:hidden;position:sticky;top:24px}
+.portrait svg,.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+
+.letter{max-width:62ch;font-size:18px}
+.letter .date{font:400 15px/1.4 var(--sans);color:var(--dim);margin:0 0 36px}
+.letter p{margin:0 0 1.15em}
+.letter .salute{margin-bottom:1.3em}
+.letter .close{margin:2em 0 .2em}
+.letter .sig{font:italic 400 clamp(30px,4vw,40px)/1.1 var(--serif);letter-spacing:-.01em;margin:0}
+.letter .sig-sub{font:400 15px/1.4 var(--sans);color:var(--dim);margin:.5em 0 0}
+
+hr{border:0;border-top:1px solid var(--ink);margin:0;opacity:.9}
+
+.work{padding-block:clamp(40px,6vw,80px) 0}
+.project{padding-bottom:clamp(56px,7vw,96px)}
+.project+.project{border-top:1px solid var(--line);padding-top:clamp(40px,5vw,64px)}
+.phead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.phead h2{font:500 clamp(32px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.02em;margin:0;text-wrap:balance}
+.phead .role{font:400 15px/1.4 var(--sans);color:var(--dim);margin:6px 0 0}
+.ctrls{display:flex;gap:8px}
+.ctrls button{width:44px;height:44px;border-radius:50%;border:1px solid #444;background:transparent;color:var(--ink);font:18px/1 var(--sans);cursor:pointer;display:grid;place-items:center}
+.ctrls button:hover{border-color:var(--ink)}
+.ctrls button:active{background:#1a1a1a}
+.ctrls button:disabled{opacity:.3;cursor:default;border-color:#444}
+
+.strip{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:14px;margin-bottom:28px;scrollbar-width:thin;scrollbar-color:#444 transparent;overscroll-behavior-x:contain}
+.strip::-webkit-scrollbar{height:6px}
+.strip::-webkit-scrollbar-thumb{background:#444;border-radius:3px}
+.strip figure{flex:0 0 clamp(260px,46vw,560px);margin:0;scroll-snap-align:start}
+.frame{aspect-ratio:4/3;background:var(--frame);overflow:hidden}
+.frame svg,.frame img{width:100%;height:100%;object-fit:cover;display:block}
+figcaption{font:400 14px/1.4 var(--sans);color:var(--dim);padding-top:10px}
+
+.ink{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.thin{stroke-width:1;opacity:.45}
+.solid{fill:var(--ink);stroke:none}
+
+.pbody{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,5vw,72px)}
+.pbody p{margin:0 0 1em;max-width:64ch}
+dl{margin:0;font:400 15px/1.45 var(--sans);border-top:1px solid var(--line)}
+dl div{display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+dt{color:var(--dim)}
+dd{margin:0}
+
+.contact{padding-block:clamp(48px,7vw,96px) 28px}
+.contact h2{font:500 clamp(32px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 14px}
+.contact p{margin:0 0 28px;color:var(--dim);max-width:52ch}
+.email{font:400 clamp(24px,4.6vw,52px)/1.1 var(--serif);letter-spacing:-.02em;text-decoration:none;border-bottom:1px solid #555;overflow-wrap:anywhere}
+.email:hover{border-color:var(--ink)}
+.elsewhere{display:flex;gap:8px 28px;flex-wrap:wrap;margin-top:28px;font:500 15px/1 var(--sans)}
+.elsewhere a{padding:14px 0;color:var(--dim);text-decoration:none}
+.elsewhere a:hover{color:var(--ink)}
+footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:64px;padding-top:20px;font:400 14px/1.4 var(--sans);color:var(--dim)}
+
+.spin{transform-origin:200px 150px;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.spin{animation:none}html{scroll-behavior:auto}}
+
+@media(max-width:860px){.intro{grid-template-columns:minmax(0,1fr)}.portrait{position:static;max-width:440px;aspect-ratio:4/3}.pbody{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.letter{font-size:17px}.letter .date{margin-bottom:24px}.strip figure{flex-basis:84%}.ctrls{display:none}dl div{grid-template-columns:7.5em minmax(0,1fr)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="name" href="#top">Thomas Huelskamp</a>
+    <div class="links"><a href="#work">Work</a><a href="#contact">Contact</a></div>
+  </nav>
+
+  <!-- INTRO: photo + letter -->
+  <section class="intro" id="top">
+    <figure class="portrait">
+      <!-- Replace this drawing with your photo:
+           <img src="images/thomas.jpg" alt="Thomas Huelskamp"> -->
+      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Line drawing of mountain ridges at dusk">
+        <circle class="ink thin" cx="270" cy="150" r="46"/>
+        <path class="ink thin" d="M0 300 L60 250 L110 280 L170 210 L230 260 L300 200 L350 240 L400 215"/>
+        <path class="ink" d="M0 360 L70 300 L120 330 L205 170 L240 215 L262 196 L330 300 L400 270"/>
+        <path class="ink thin" d="M205 170 L222 228 L240 215 M205 170 L190 240 L170 258"/>
+        <path class="ink" d="M0 430 L90 380 L160 410 L250 360 L330 400 L400 380"/>
+        <g id="trees"></g>
+      </svg>
+    </figure>
+
+    <article class="letter">
+      <p class="date">November 2026</p>
+      <p class="salute">Dear reader,</p>
+      <p>Thanks for stopping by. I'm Thomas, a student graduating in May 2027, and I like problems you can hold in your hands: parts that have to fit, machines that have to run, and numbers that have to add up on the bench and not only on paper.</p>
+      <p>Right now that means two things. On my own time I'm building a Savonius wind turbine and working out how much power it really makes. With the VectorCam team at Johns Hopkins CBID, I work on the hardware for an AI-enabled camera that helps track the mosquitoes that spread disease.</p>
+      <p>Below are photos and notes from both. If something here is useful to you, or you're working on something I could help with, my contact details are at the bottom of the page.</p>
+      <p class="close">Sincerely,</p>
+      <p class="sig">Thomas Huelskamp</p>
+      <p class="sig-sub">Class of 2027</p>
+    </article>
+  </section>
+</div>
+
+<hr>
+
+<main class="wrap work" id="work">
+
+  <!-- PROJECT: copy this whole <section class="project"> block to add another project -->
+  <section class="project" aria-labelledby="p-vawt">
+    <div class="phead">
+      <div>
+        <h2 id="p-vawt">Vertical axis wind turbine</h2>
+        <p class="role">Personal project</p>
+      </div>
+      <div class="ctrls"><button type="button" data-dir="-1" aria-label="Previous image">&larr;</button><button type="button" data-dir="1" aria-label="Next image">&rarr;</button></div>
+    </div>
+
+    <div class="strip" tabindex="0" aria-label="Wind turbine images">
+      <!-- To use a photo, replace the <svg> inside .frame with <img src="images/vawt-1.jpg" alt="..."> -->
+      <figure>
+        <div class="frame">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Side view of a two-stage Savonius rotor">
+            <line class="ink" x1="200" y1="24" x2="200" y2="286"/>
+            <ellipse class="ink" cx="200" cy="58" rx="92" ry="13"/>
+            <ellipse class="ink" cx="200" cy="150" rx="92" ry="13"/>
+            <ellipse class="ink" cx="200" cy="242" rx="92" ry="13"/>
+            <path class="ink" d="M112 62 V146 M200 71 V137"/>
+            <path class="ink thin" d="M112 80 Q150 92 200 84 M112 104 Q150 116 200 108 M112 128 Q150 140 200 132"/>
+            <path class="ink" d="M288 154 V238 M200 163 V229"/>
+            <path class="ink thin" d="M200 176 Q250 188 288 180 M200 200 Q250 212 288 204 M200 224 Q250 236 288 228"/>
+            <path class="ink" d="M170 286 H230"/>
+          </svg>
+        </div>
+        <figcaption>Rotor, side view</figcaption>
+      </figure>
+      <figure>
+        <div class="frame">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Top view of the S-shaped rotor turning in the wind">
+            <g class="ink thin"><path d="M18 110 H70 M18 150 H70 M18 190 H70"/><path d="M62 104 L70 110 L62 116 M62 144 L70 150 L62 156 M62 184 L70 190 L62 196"/></g>
+            <circle class="ink thin" cx="200" cy="150" r="118" stroke-dasharray="3 7"/>
+            <g class="spin">
+              <path class="ink" d="M88 150 A62 62 0 0 1 212 150"/>
+              <path class="ink" d="M188 150 A62 62 0 0 0 312 150"/>
+              <circle class="solid" cx="200" cy="150" r="4"/>
+            </g>
+          </svg>
+        </div>
+        <figcaption>Rotor, top view: two overlapping buckets catch the wind by drag</figcaption>
+      </figure>
+      <figure>
+        <div class="frame">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Brushless DC motor stator considered as the generator">
+            <circle class="ink" cx="200" cy="150" r="112"/>
+            <circle class="ink thin" cx="200" cy="150" r="96"/>
+            <g id="teeth"></g>
+            <circle class="ink" cx="200" cy="150" r="30"/>
+            <circle class="solid" cx="200" cy="150" r="5"/>
+          </svg>
+        </div>
+        <figcaption>Brushless DC motor, the generator under consideration</figcaption>
+      </figure>
+    </div>
+
+    <div class="pbody">
+      <div>
+        <p>A drag-type Savonius rotor I'm designing and building myself. Savonius turbines are slow and simple, but they start in light, gusty wind from any direction, which makes them a good fit for a small battery-charging setup.</p>
+        <p>Most of the work so far has been analysis: estimating the startup torque the rotor needs to get moving, and the gap between peak output and what it averages over real wind. Peak power is around 500 W; the average is closer to 10 W, and that gap drives most of the electrical decisions.</p>
+      </div>
+      <dl>
+        <div><dt>Rotor</dt><dd>Savonius, drag type</dd></div>
+        <div><dt>Output</dt><dd>~500 W peak, ~10 W average</dd></div>
+        <div><dt>System</dt><dd>24 V, LiFePO4 battery</dd></div>
+        <div><dt>Charging</dt><dd>Commercial wind charge controller</dd></div>
+        <div><dt>Monitoring</dt><dd>Rectifier, voltage and current displays, microcontroller</dd></div>
+        <div><dt>Status</dt><dd>Choosing the generator</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="project" aria-labelledby="p-vc">
+    <div class="phead">
+      <div>
+        <h2 id="p-vc">VectorCam</h2>
+        <p class="role">Hardware team, Dr. Acharya's lab, Johns Hopkins CBID</p>
+      </div>
+      <div class="ctrls"><button type="button" data-dir="-1" aria-label="Previous image">&larr;</button><button type="button" data-dir="1" aria-label="Next image">&rarr;</button></div>
+    </div>
+
+    <div class="strip" tabindex="0" aria-label="VectorCam images">
+      <figure>
+        <div class="frame">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Imaging device with a camera above a specimen tray">
+            <rect class="ink" x="110" y="40" width="180" height="200" rx="10"/>
+            <rect class="ink thin" x="126" y="56" width="148" height="70" rx="4"/>
+            <circle class="ink" cx="200" cy="91" r="22"/>
+            <circle class="ink thin" cx="200" cy="91" r="11"/>
+            <path class="ink" d="M126 186 H274 M138 186 V204 H262 V186"/>
+            <path class="ink thin" d="M170 126 L150 186 M230 126 L250 186"/>
+            <path class="ink" d="M96 260 H304"/>
+          </svg>
+        </div>
+        <figcaption>Imaging unit: camera above a specimen tray</figcaption>
+      </figure>
+      <figure>
+        <div class="frame">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Line drawing of a mosquito">
+            <ellipse class="ink" cx="150" cy="150" rx="22" ry="17"/>
+            <ellipse class="ink" cx="232" cy="156" rx="66" ry="11" transform="rotate(6 232 156)"/>
+            <circle class="ink" cx="118" cy="146" r="10"/>
+            <path class="ink" d="M108 148 L52 168"/>
+            <path class="ink thin" d="M112 140 L82 118 M112 142 L86 112"/>
+            <path class="ink thin" d="M152 136 C190 80 250 70 300 84 C260 104 200 124 158 138"/>
+            <path class="ink thin" d="M156 136 C200 100 252 104 290 118 C250 128 200 134 160 140"/>
+            <path class="ink" d="M140 164 L118 214 L104 262 M152 166 L150 222 L140 272 M164 164 L196 216 L228 262"/>
+          </svg>
+        </div>
+        <figcaption>Specimens are photographed so the model can identify them</figcaption>
+      </figure>
+      <figure>
+        <div class="frame">
+          <svg viewBox="0 0 400 300" role="img" aria-label="Specimen tray with one sample boxed by the detector">
+            <g id="tray"></g>
+          </svg>
+        </div>
+        <figcaption>Detection on a tray of samples</figcaption>
+      </figure>
+    </div>
+
+    <div class="pbody">
+      <div>
+        <p>VectorCam is an AI-enabled device for mosquito vector surveillance: it images collected mosquitoes so they can be identified quickly in the field, without a trained specialist at a microscope. Knowing which species are present, and where, is what lets health teams target malaria and other mosquito-borne disease.</p>
+        <p>I'm on the hardware side of the team, working with Dr. Acharya's lab at the Johns Hopkins Center for Bioengineering Innovation and Design, and I help bring new mechanical engineering undergrads onto the hardware team.</p>
+      </div>
+      <dl>
+        <div><dt>What</dt><dd>AI-enabled mosquito surveillance device</dd></div>
+        <div><dt>Where</dt><dd>Johns Hopkins CBID, Dr. Acharya's lab</dd></div>
+        <div><dt>My role</dt><dd>Hardware engineering, recruiting for the hardware team</dd></div>
+      </dl>
+    </div>
+  </section>
+
+</main>
+
+<hr>
+
+<div class="wrap">
+  <section class="contact" id="contact" aria-labelledby="c-h">
+    <h2 id="c-h">Contact</h2>
+    <p>For projects, research, or anything on this page, email is the fastest way to reach me.</p>
+    <!-- Put your real address in both the href and the text -->
+    <a class="email" href="mailto:hello@thomashuelskamp.com">hello@thomashuelskamp.com</a>
+    <div class="elsewhere">
+      <!-- Replace with your profile URLs -->
+      <a href="https://www.linkedin.com/">LinkedIn</a>
+      <a href="https://github.com/">GitHub</a>
+    </div>
+    <footer>
+      <span>&copy; <span id="yr">2026</span> Thomas Huelskamp</span>
+      <a href="#top">Back to top</a>
+    </footer>
+  </section>
+</div>
+
+<script>
+{
+  const NS = 'http://www.w3.org/2000/svg';
+
+  // Stator teeth for the generator drawing
+  const teeth = document.getElementById('teeth');
+  if (teeth) {
+    let d = '';
+    const n = 12;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2;
+      const c = Math.cos(a), s = Math.sin(a);
+      const x1 = 200 + c * 40, y1 = 150 + s * 40, x2 = 200 + c * 88, y2 = 150 + s * 88;
+      d += `M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)} `;
+      const px = -s * 9, py = c * 9;
+      d += `M${(x2 + px).toFixed(1)} ${(y2 + py).toFixed(1)} L${(x2 - px).toFixed(1)} ${(y2 - py).toFixed(1)} `;
+    }
+    const p = document.createElementNS(NS, 'path');
+    p.setAttribute('d', d);
+    p.setAttribute('class', 'ink');
+    teeth.appendChild(p);
+  }
+
+  // Specimen tray: 6 x 4 wells, one boxed by the detector
+  const tray = document.getElementById('tray');
+  if (tray) {
+    let h = '<rect class="ink" x="40" y="40" width="320" height="220" rx="8"/>';
+    for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) {
+      const x = 80 + c * 48, y = 78 + r * 48;
+      h += `<circle class="ink thin" cx="${x}" cy="${y}" r="16"/>`;
+      if (r === 1 && c === 3) h += `<path class="ink" d="M${x - 7} ${y + 4} L${x + 8} ${y - 3} M${x - 3} ${y + 2} L${x - 8} ${y + 10} M${x + 2} ${y} L${x + 4} ${y + 10}"/><rect class="ink" x="${x - 24}" y="${y - 24}" width="48" height="48" stroke-dasharray="6 4"/>`;
+    }
+    tray.innerHTML = h;
+  }
+
+  // Simple trees along the foreground ridge of the portrait drawing
+  const trees = document.getElementById('trees');
+  if (trees) {
+    let seed = 7, h = '';
+    const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
+    for (let i = 0; i < 14; i++) {
+      const x = 12 + i * 29 + rnd() * 10, base = 470 - rnd() * 12, ht = 26 + rnd() * 26;
+      h += `<path class="ink thin" d="M${x.toFixed(1)} ${base.toFixed(1)} V${(base - ht).toFixed(1)} M${(x - ht / 4).toFixed(1)} ${(base - ht / 3).toFixed(1)} L${x.toFixed(1)} ${(base - ht).toFixed(1)} L${(x + ht / 4).toFixed(1)} ${(base - ht / 3).toFixed(1)}"/>`;
+    }
+    trees.innerHTML = h;
+  }
+
+  // Arrow buttons scroll each project's image strip one frame at a time
+  for (const proj of document.querySelectorAll('.project')) {
+    const strip = proj.querySelector('.strip');
+    const btns = proj.querySelectorAll('.ctrls button');
+    if (!strip || !btns.length) continue;
+    const step = () => {
+      const f = strip.querySelector('figure');
+      return f ? f.getBoundingClientRect().width + 16 : strip.clientWidth;
+    };
+    const update = () => {
+      const max = strip.scrollWidth - strip.clientWidth - 2;
+      btns[0].disabled = strip.scrollLeft <= 2;
+      btns[1].disabled = strip.scrollLeft >= max;
+    };
+    btns.forEach(b => b.addEventListener('click', () => {
+      strip.scrollBy({ left: Number(b.dataset.dir) * step(), behavior: 'smooth' });
+    }));
+    strip.addEventListener('scroll', update, { passive: true });
+    const ro = new ResizeObserver(update);
+    ro.observe(strip);
+    update();
+  }
+
+  const yr = document.getElementById('yr');
+  if (yr) yr.textContent = new Date().getFullYear();
+}
+</script>
+</body>
+</html>
