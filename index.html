@@ -74,6 +74,11 @@ hr{border:0;border-top:1px solid var(--ink);margin:0 auto;width:calc(min(1240px,
 .gallery figure{margin:0}
 .frame{aspect-ratio:4/3;background:var(--frame);overflow:hidden}
 .frame svg,.frame img{width:100%;height:100%;object-fit:cover;display:block}
+.model{position:relative;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.model:active{cursor:grabbing}
+.model img,.model canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.model canvas{opacity:0;transition:opacity .4s ease;touch-action:pan-y !important}
+.model.ready canvas{opacity:1}
 figcaption{font:400 14px/1.4 var(--sans);color:var(--dim);padding-top:10px}
 
 .ink{fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
@@ -185,11 +190,11 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       </figure>
       <figure>
         <div class="frame">
-          <svg viewBox="0 0 400 300" role="img" aria-label="Specimen tray with one sample boxed by the detector">
-            <g id="tray"></g>
-          </svg>
+          <div class="model" data-stl="models/VectorCam2.stl" role="img" aria-label="Rotating 3D model of the VectorCam 2 print plate">
+            <img src="images/vectorcam2-model.jpg" alt="" width="1200" height="900" loading="lazy">
+          </div>
         </div>
-        <figcaption>Detection on a tray of samples</figcaption>
+        <figcaption>VectorCam 2 print plate, 3D model. Drag to rotate.</figcaption>
       </figure>
     </div>
 
@@ -261,19 +266,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 {
   const NS = 'http://www.w3.org/2000/svg';
 
-  // Specimen tray: 6 x 4 wells, one boxed by the detector
-  const tray = document.getElementById('tray');
-  if (tray) {
-    let h = '<rect class="ink" x="40" y="40" width="320" height="220" rx="8"/>';
-    for (let r = 0; r < 4; r++) for (let c = 0; c < 6; c++) {
-      const x = 80 + c * 48, y = 78 + r * 48;
-      h += `<circle class="ink thin" cx="${x}" cy="${y}" r="16"/>`;
-      if (r === 1 && c === 3) h += `<path class="ink" d="M${x - 7} ${y + 4} L${x + 8} ${y - 3} M${x - 3} ${y + 2} L${x - 8} ${y + 10} M${x + 2} ${y} L${x + 4} ${y + 10}"/><rect class="ink" x="${x - 24}" y="${y - 24}" width="48" height="48" stroke-dasharray="6 4"/>`;
-    }
-    tray.innerHTML = h;
-  }
-
-
   // Left/right navigation between projects
   const slides = document.getElementById('slides');
   const projects = slides ? [...slides.querySelectorAll('.project')] : [];
@@ -318,6 +310,100 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
   const yr = document.getElementById('yr');
   if (yr) yr.textContent = new Date().getFullYear();
 }
+</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import { STLLoader } from 'three/addons/loaders/STLLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// Interactive STL viewer: loads when scrolled near, auto-rotates, drag to rotate
+const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+function mount(box) {
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setClearColor(0x111111, 1);
+  box.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(30, 4 / 3, 1, 5000);
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x222222, 1.6));
+  const key = new THREE.DirectionalLight(0xffffff, 2.2);
+  key.position.set(1, 1.4, 1.2);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.8);
+  rim.position.set(-1.2, 0.6, -1);
+  scene.add(rim);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableZoom = false;
+  controls.enablePan = false;
+  controls.enableDamping = true;
+  controls.autoRotate = !still;
+  controls.autoRotateSpeed = 1.2;
+
+  const size = () => {
+    const w = box.clientWidth, h = box.clientHeight;
+    if (!w || !h) return;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+  };
+  const sizeRO = new ResizeObserver(size);
+  sizeRO.observe(box);
+  size();
+
+  new STLLoader().load(box.dataset.stl, geo => {
+    geo.rotateX(-Math.PI / 2);          // STL is Z-up; three.js is Y-up
+    geo.center();
+    geo.computeVertexNormals();
+    const mesh = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: 0xe9e9e9, roughness: 0.55, metalness: 0.05 }));
+    scene.add(mesh);
+    geo.computeBoundingSphere();
+    const r = geo.boundingSphere.radius;
+    const d = r / Math.sin(THREE.MathUtils.degToRad(camera.fov / 2));
+    const az = 5.41, el = 0.85;
+    const target = new THREE.Vector3();
+    camera.position.set(d * Math.cos(el) * Math.sin(az), d * Math.sin(el), d * Math.cos(el) * Math.cos(az));
+    // Frame the parts in the first view: centre their on-screen outline and fill ~85% of the frame
+    const pos = geo.attributes.position, v = new THREE.Vector3(), step = Math.max(1, Math.floor(pos.count / 6000));
+    for (let pass = 0; pass < 3; pass++) {
+      camera.lookAt(target); camera.updateMatrixWorld();
+      let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+      for (let i = 0; i < pos.count; i += step) {
+        v.fromBufferAttribute(pos, i).project(camera);
+        x0 = Math.min(x0, v.x); x1 = Math.max(x1, v.x); y0 = Math.min(y0, v.y); y1 = Math.max(y1, v.y);
+      }
+      const dist = camera.position.distanceTo(target);
+      const halfH = dist * Math.tan(THREE.MathUtils.degToRad(camera.fov / 2)), halfW = halfH * camera.aspect;
+      const right = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 0);
+      const up = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 1);
+      const shift = right.multiplyScalar((x0 + x1) / 2 * halfW).add(up.multiplyScalar((y0 + y1) / 2 * halfH));
+      target.add(shift); camera.position.add(shift);
+      const fill = Math.max((x1 - x0) / 2, (y1 - y0) / 2) / 0.85;
+      camera.position.sub(target).multiplyScalar(fill).add(target);
+    }
+    camera.near = d / 50; camera.far = d * 10; camera.updateProjectionMatrix();
+    controls.target.copy(target);
+    controls.update();
+    box.classList.add('ready');
+  });
+
+  let visible = true;
+  const visIO = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
+  visIO.observe(box);
+  renderer.setAnimationLoop(() => {
+    if (!visible) return;
+    controls.update();
+    renderer.render(scene, camera);
+  });
+}
+
+const boxes = document.querySelectorAll('.model[data-stl]');
+const loadIO = new IntersectionObserver(entries => {
+  for (const e of entries) if (e.isIntersecting) { loadIO.unobserve(e.target); try { mount(e.target); } catch (err) {} }
+}, { rootMargin: '300px' });
+boxes.forEach(b => loadIO.observe(b));
 </script>
 </body>
 </html>
