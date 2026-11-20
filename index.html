@@ -72,12 +72,8 @@ figcaption{font:400 14px/1.4 var(--sans);color:var(--dim);padding-top:10px}
 .thin{stroke-width:1;opacity:.45}
 .solid{fill:var(--ink);stroke:none}
 
-.pbody{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,5vw,72px)}
+.pbody{display:block}
 .pbody p{margin:0 0 1em;max-width:64ch}
-dl{margin:0;font:400 15px/1.45 var(--sans);border-top:1px solid var(--line)}
-dl div{display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
-dt{color:var(--dim)}
-dd{margin:0}
 
 .contact{padding-block:clamp(48px,7vw,96px) 28px}
 .contact h2{font:500 clamp(32px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 14px}
@@ -91,8 +87,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 
-@media(max-width:860px){.intro{grid-template-columns:minmax(0,1fr)}.portrait{max-width:440px;aspect-ratio:4/3}.pbody{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:600px){.letter{font-size:17px}.letter .date{margin-bottom:24px}.gallery{grid-template-columns:minmax(0,1fr)}dl div{grid-template-columns:7.5em minmax(0,1fr)}}
+@media(max-width:860px){.intro{grid-template-columns:minmax(0,1fr)}.portrait{max-width:440px;aspect-ratio:4/3}}
+@media(max-width:600px){.letter{font-size:17px}.letter .date{margin-bottom:24px}.gallery{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
@@ -185,11 +181,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
         <p>VectorCam 2 is an AI-enabled device for mosquito vector surveillance: it images collected mosquitoes so they can be identified quickly in the field, without a trained specialist at a microscope. Knowing which species are present, and where, is what lets health teams target malaria and other mosquito-borne disease.</p>
         <p>I'm on the hardware side of the team, working with Dr. Acharya's lab at the Johns Hopkins Center for Bioengineering Innovation and Design, and I help bring new mechanical engineering undergrads onto the hardware team.</p>
       </div>
-      <dl>
-        <div><dt>What</dt><dd>AI-enabled mosquito surveillance device</dd></div>
-        <div><dt>Where</dt><dd>Johns Hopkins CBID, Dr. Acharya's lab</dd></div>
-        <div><dt>My role</dt><dd>Hardware engineering, recruiting for the hardware team</dd></div>
-      </dl>
     </div>
   </section>
 
