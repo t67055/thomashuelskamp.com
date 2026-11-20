@@ -80,7 +80,11 @@ figcaption{font:400 14px/1.4 var(--sans);color:var(--dim);padding-top:10px}
 .thin{stroke-width:1;opacity:.45}
 .solid{fill:var(--ink);stroke:none}
 
-.pbody{display:block}
+.pbody{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,5vw,72px)}
+dl{margin:0;font:400 15px/1.45 var(--sans);border-top:1px solid var(--line)}
+dl div{display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+dt{color:var(--dim)}
+dd{margin:0}
 .pbody p{margin:0 0 1em;max-width:64ch}
 
 .contact{padding-block:clamp(48px,7vw,96px) 28px}
@@ -95,7 +99,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.portrait figcaption{transition:none}}
 
-@media(max-width:860px){.intro{grid-template-columns:minmax(0,1fr)}.portrait{max-width:440px;aspect-ratio:4/3}}
+@media(max-width:860px){.pbody{grid-template-columns:minmax(0,1fr)}.intro{grid-template-columns:minmax(0,1fr)}.portrait{max-width:440px;aspect-ratio:4/3}}
 @media(max-width:600px){.letter,.portrait figcaption{font-size:17px}.letter .date{margin-bottom:24px}.gallery{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
@@ -195,6 +199,13 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
         <p>Previous generations of VectorCam devices served as the foundation for building VCI's mosquito database. But they were also phone-specific, adding unnecessary barriers of time and money to reaching democratized vector surveillance.</p>
         <p>VectorCam 2 builds on the footprint of past devices, but is adaptable to any phone, cuts out unnecessary electronics, and is designed to be manufactured anywhere in the world.</p>
       </div>
+      <dl>
+        <div><dt>Design</dt><dd>Universal</dd></div>
+        <div><dt>Electronics</dt><dd>33% fewer</dd></div>
+        <div><dt>Filament</dt><dd>39% less</dd></div>
+        <div><dt>Cost</dt><dd>59% cheaper</dd></div>
+        <div><dt>Open source</dt><dd><a href="https://build-vectorcam.org">build-vectorcam.org</a></dd></div>
+      </dl>
     </div>
   </section>
 
