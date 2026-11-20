@@ -406,7 +406,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
       const H = innerHeight;
       for (const el of secs) {
         const r = el.getBoundingClientRect();
-        el.classList.toggle('off-view', !(r.top < H * 0.75 && r.bottom > H * 0.25));
+        el.classList.toggle('off-view', !(r.top < H * 0.62 && r.bottom > H * 0.38));
       }
     };
     addEventListener('scroll', focus, { passive: true });
