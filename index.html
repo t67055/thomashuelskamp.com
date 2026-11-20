@@ -26,15 +26,10 @@ a:hover{color:#fff}
 img{max-width:100%;display:block}
 .wrap{max-width:1240px;margin:0 auto;padding-left:max(5vw,16px);padding-right:max(5vw,16px)}
 
-nav{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding-block:22px;font:500 15px/1 var(--sans)}
-nav .links{display:flex;gap:4px}
-nav .links a{text-decoration:none;color:var(--dim);padding:14px 10px}
-nav .links a:hover{color:var(--ink)}
-nav .name{text-decoration:none;letter-spacing:-.01em}
 
-.intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:start;padding-block:clamp(20px,4vw,56px) clamp(48px,6vw,88px)}
+.intro{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,5vw,72px);align-items:start;padding-block:clamp(28px,6vw,88px) clamp(48px,6vw,88px)}
 .portrait{margin:0;aspect-ratio:4/5;background:var(--frame);overflow:hidden;position:sticky;top:24px}
-.portrait svg,.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:23% 50%;display:block}
 
 .letter{max-width:62ch;font-size:18px}
 .letter .date{font:400 15px/1.4 var(--sans);color:var(--dim);margin:0 0 36px}
@@ -98,24 +93,11 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 <body>
 
 <div class="wrap">
-  <nav aria-label="Main">
-    <a class="name" href="#top">Thomas Huelskamp</a>
-    <div class="links"><a href="#work">Work</a><a href="#contact">Contact</a></div>
-  </nav>
 
   <!-- INTRO: photo + letter -->
   <section class="intro" id="top">
     <figure class="portrait">
-      <!-- Replace this drawing with your photo:
-           <img src="images/thomas.jpg" alt="Thomas Huelskamp"> -->
-      <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Line drawing of mountain ridges at dusk">
-        <circle class="ink thin" cx="270" cy="150" r="46"/>
-        <path class="ink thin" d="M0 300 L60 250 L110 280 L170 210 L230 260 L300 200 L350 240 L400 215"/>
-        <path class="ink" d="M0 360 L70 300 L120 330 L205 170 L240 215 L262 196 L330 300 L400 270"/>
-        <path class="ink thin" d="M205 170 L222 228 L240 215 M205 170 L190 240 L170 258"/>
-        <path class="ink" d="M0 430 L90 380 L160 410 L250 360 L330 400 L400 380"/>
-        <g id="trees"></g>
-      </svg>
+      <img src="images/thomas.jpg" alt="Thomas Huelskamp sitting among summit rocks in the clouds" width="1600" height="1061">
     </figure>
 
     <article class="letter">
@@ -326,17 +308,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     tray.innerHTML = h;
   }
 
-  // Simple trees along the foreground ridge of the portrait drawing
-  const trees = document.getElementById('trees');
-  if (trees) {
-    let seed = 7, h = '';
-    const rnd = () => (seed = seed * 16807 % 2147483647) / 2147483647;
-    for (let i = 0; i < 14; i++) {
-      const x = 12 + i * 29 + rnd() * 10, base = 470 - rnd() * 12, ht = 26 + rnd() * 26;
-      h += `<path class="ink thin" d="M${x.toFixed(1)} ${base.toFixed(1)} V${(base - ht).toFixed(1)} M${(x - ht / 4).toFixed(1)} ${(base - ht / 3).toFixed(1)} L${x.toFixed(1)} ${(base - ht).toFixed(1)} L${(x + ht / 4).toFixed(1)} ${(base - ht / 3).toFixed(1)}"/>`;
-    }
-    trees.innerHTML = h;
-  }
 
   // Arrow buttons scroll each project's image strip one frame at a time
   for (const proj of document.querySelectorAll('.project')) {
