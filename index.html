@@ -108,6 +108,8 @@ dl div{display:grid;grid-template-columns:8.5em minmax(0,1fr);gap:12px;padding:1
 dt{color:var(--dim)}
 dd{margin:0}
 .pbody p{margin:0 0 1em;max-width:64ch}
+.pbody ol{margin:0 0 1em;padding-left:1.4em;max-width:64ch}
+.pbody li{margin-bottom:.25em;padding-left:.2em}
 
 .contact{padding-block:clamp(48px,7vw,96px) 28px}
 .contact h2{font:500 clamp(32px,4.4vw,48px)/1.05 var(--serif);letter-spacing:-.02em;margin:0 0 14px}
@@ -289,7 +291,14 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
 
     <div class="pbody">
       <div>
-        <p>Details and photos coming soon.</p>
+        <p>What does it take to bring a device from prototype to product?</p>
+        <p>Scaling up VCI's manufacturing has involved three ongoing projects:</p>
+        <ol>
+          <li>Building an in-house 3D printing farm</li>
+          <li>Working with Kenyan manufacturers to build at scale</li>
+          <li>Publishing open-source hardware and instructions</li>
+        </ol>
+        <p>So far, this has involved building our own print farm, an open-source build guide (<a href="https://build-vectorcam.org">build-vectorcam.org</a>), and the systems and documentation that serve as a foundation for VectorCam manufacturing. This includes many smaller tools, such as a device ID protocol, manufacturing specs, and specimen label printing.</p>
       </div>
     </div>
   </section>
