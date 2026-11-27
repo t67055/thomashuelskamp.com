@@ -177,7 +177,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     <div class="gallery">
       <figure>
         <div class="frame">
-          <div class="model" data-stl="models/VectorCam2-assembly.stl" data-az="1.46" data-el="1.50" data-rotate="false" role="img" aria-label="3D model of the assembled VectorCam 2, seen from above">
+          <div class="model" data-stl="models/VectorCam2-assembly.stl" data-az="1.46" data-el="1.50" data-fill="0.9" data-rotate="false" role="img" aria-label="3D model of the assembled VectorCam 2, seen from above">
             <img src="images/vectorcam2-assembly.jpg" alt="" width="1200" height="900" loading="lazy">
           </div>
         </div>
@@ -553,7 +553,7 @@ function mount(box) {
       const up = new THREE.Vector3().setFromMatrixColumn(camera.matrixWorld, 1);
       const shift = right.multiplyScalar((x0 + x1) / 2 * halfW).add(up.multiplyScalar((y0 + y1) / 2 * halfH));
       target.add(shift); camera.position.add(shift);
-      const fill = Math.max((x1 - x0) / 2, (y1 - y0) / 2) / 0.85;
+      const fill = Math.max((x1 - x0) / 2, (y1 - y0) / 2) / parseFloat(box.dataset.fill || 0.85);
       camera.position.sub(target).multiplyScalar(fill).add(target);
     }
     camera.near = d / 50; camera.far = d * 10; camera.updateProjectionMatrix();
