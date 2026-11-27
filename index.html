@@ -195,15 +195,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
         </div>
         <figcaption>3D printed without supports</figcaption>
       </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
     </div>
 
     <div class="pbody">
@@ -252,9 +243,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
         <div class="frame"><img src="images/specimen-id.jpg" alt="ID Printer showing a sheet of specimen ID labels" width="1600" height="1200" loading="lazy"></div>
         <figcaption>Specimen ID Printer</figcaption>
       </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
     </div>
 
     <div class="pbody">
@@ -280,15 +268,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     </div>
     <div class="gallery">
       <!-- Replace each empty frame with a <figure> holding an <img> or 3D model -->
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
       <figure>
         <div class="frame empty">Photo coming soon</div>
       </figure>
@@ -337,12 +316,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
           </div>
         </div>
         <figcaption>Small Tablet (drag to rotate)</figcaption>
-      </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
-      </figure>
-      <figure>
-        <div class="frame empty">Photo coming soon</div>
       </figure>
     </div>
 
@@ -429,6 +402,14 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border
     const slideRO = new ResizeObserver(update);
     slideRO.observe(slides);
     update();
+  }
+
+  // Photo rule: under 3 real photos, pad with "coming soon" slots to 3; 3 or more, show only the real ones
+  for (const gal of document.querySelectorAll('.gallery')) {
+    const empties = [...gal.querySelectorAll('.frame.empty')].map(f => f.closest('figure'));
+    const real = gal.querySelectorAll('figure').length - empties.length;
+    empties.slice(Math.max(0, 3 - real)).forEach(f => f.remove());
+    for (let i = real + empties.length; i < 3; i++) gal.insertAdjacentHTML('beforeend', '<figure><div class="frame empty">Photo coming soon</div></figure>');
   }
 
   // Photo carousels: three photos in view, small arrows scroll to the rest
